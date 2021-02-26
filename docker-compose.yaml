@@ -25,7 +25,7 @@ services:
       - ~/efk/elasticsearch0/logs:/usr/share/elasticsearch/logs
       - ~/efk/elasticsearch0/plugins:/usr/share/elasticsearch/plugins
     extra_hosts:
-      - elasticsearch: ${THIS_IP}
+      - 'elasticsearch: ${THIS_IP}'
     networks:
       - outside
   elasticsearch1:
@@ -48,7 +48,7 @@ services:
       - ~/efk/elasticsearch1/logs:/usr/share/elasticsearch/logs
       - ~/efk/elasticsearch1/plugins:/usr/share/elasticsearch/plugins
     extra_hosts:
-      - elasticsearch: ${THIS_IP}
+      - 'elasticsearch: ${THIS_IP}'
     networks:
       - outside
 networks:
