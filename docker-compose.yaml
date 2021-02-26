@@ -16,7 +16,7 @@ services:
       - cluster.initial_master_nodes=["elasticsearch0"]
       - path.data=/usr/share/elasticsearch/data
       - path.logs=/usr/share/elasticsearch/logs
-      -
+      - path.plugins=/usr/share/elasticsearch/plugins
     ports:
       - 9200:9200
     volumes:
@@ -25,7 +25,7 @@ services:
       - ~/efk/elasticsearch0/logs:/usr/share/elasticsearch/logs
       - ~/efk/elasticsearch0/plugins:/usr/share/elasticsearch/plugins
     extra_hosts:
-      - 'elasticsearch: ${THIS_IP}'
+      - 'elasticsearch0: ${THIS_IP}'
     networks:
       - outside
   elasticsearch1:
@@ -42,13 +42,16 @@ services:
       - http.cors.enabled=true
       - http.cors.allow-origin="*"
       - cluster.initial_master_nodes=["elasticsearch0"]
+      - path.data=/usr/share/elasticsearch/data
+      - path.logs=/usr/share/elasticsearch/logs
+      - path.plugins=/usr/share/elasticsearch/plugins
     volumes:
       - /etc/localtime:/etc/localtime
       - ~/efk/elasticsearch1/data:/usr/share/elasticsearch/data
       - ~/efk/elasticsearch1/logs:/usr/share/elasticsearch/logs
       - ~/efk/elasticsearch1/plugins:/usr/share/elasticsearch/plugins
     extra_hosts:
-      - 'elasticsearch: ${THIS_IP}'
+      - 'elasticsearch0: ${THIS_IP}'
     networks:
       - outside
 networks:
