@@ -1,0 +1,57 @@
+version: "3.2"
+services:
+  elasticsearch0:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.13
+    restart: always
+    container_name: elasticsearch0
+    hostname: elasticsearch0
+    environment:
+      - TZ=Asia/Shanghai
+      - ES_JAVA_OPTS="-Xms256m -Xmx256m"
+      - cluster.name=elasticsearch-cluster
+      - node.name=elasticsearch0
+      - network.host=0.0.0.0
+      - http.cors.enabled=true
+      - http.cors.allow-origin="*"
+      - cluster.initial_master_nodes=["elasticsearch0"]
+      - path.data=/usr/share/elasticsearch/data
+      - path.logs=/usr/share/elasticsearch/logs
+      -
+    ports:
+      - 9200:9200
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ~/efk/elasticsearch0/data:/usr/share/elasticsearch/data
+      - ~/efk/elasticsearch0/logs:/usr/share/elasticsearch/logs
+      - ~/efk/elasticsearch0/plugins:/usr/share/elasticsearch/plugins
+    extra_hosts:
+      - elasticsearch: ${THIS_IP}
+    networks:
+      - outside
+  elasticsearch1:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.13
+    restart: always
+    container_name: elasticsearch1
+    hostname: elasticsearch1
+    environment:
+      - TZ=Asia/Shanghai
+      - ES_JAVA_OPTS="-Xms256m -Xmx256m"
+      - cluster.name=elasticsearch-cluster
+      - node.name=elasticsearch1
+      - network.host=0.0.0.0
+      - http.cors.enabled=true
+      - http.cors.allow-origin="*"
+      - cluster.initial_master_nodes=["elasticsearch0"]
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ~/efk/elasticsearch1/data:/usr/share/elasticsearch/data
+      - ~/efk/elasticsearch1/logs:/usr/share/elasticsearch/logs
+      - ~/efk/elasticsearch1/plugins:/usr/share/elasticsearch/plugins
+    extra_hosts:
+      - elasticsearch: ${THIS_IP}
+    networks:
+      - outside
+networks:
+  outside:
+    external:
+      name: efk
