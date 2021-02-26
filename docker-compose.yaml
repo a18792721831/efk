@@ -1,7 +1,7 @@
 version: "3.2"
 services:
   elasticsearch0:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.13
+    image: elasticsearch:6.8.13
     restart: always
     container_name: elasticsearch0
     hostname: elasticsearch0
@@ -29,7 +29,7 @@ services:
     networks:
       - outside
   elasticsearch1:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.13
+    image: elasticsearch:6.8.13
     restart: always
     container_name: elasticsearch1
     hostname: elasticsearch1
