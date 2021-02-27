@@ -1,7 +1,7 @@
 version: "3.2"
 services:
   elasticsearch0:
-    image: elasticsearch:7.10.1
+    image: elasticsearch:${ES_VERSION}
     restart: always
     container_name: elasticsearch0
     hostname: elasticsearch0
@@ -22,7 +22,7 @@ services:
     networks:
       - outside
   elasticsearch1:
-    image: elasticsearch:7.10.1
+    image: elasticsearch:${ES_VERSION}
     restart: always
     container_name: elasticsearch1
     hostname: elasticsearch1
@@ -40,7 +40,7 @@ services:
     networks:
       - outside
   elasticsearch2:
-    image: elasticsearch:7.10.1
+    image: elasticsearch:${ES_VERSION}
     restart: always
     container_name: elasticsearch2
     hostname: elasticsearch2
