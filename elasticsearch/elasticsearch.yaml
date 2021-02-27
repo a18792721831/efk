@@ -2,8 +2,10 @@
 cluster.name: "elasticsearch-cluster"
 # 节点的名字
 #node.name: "boss-elasticsearch"
-# 主节点
-cluster.initial_master_nodes: ["elasticsearch:9301"]
+# 主节点地址
+discovery.seed_hosts: ['elasticsearch']
+# 主节点设置
+cluster.initial_master_nodes: ['elasticsearch:9301']
 # 网络访问
 network.host: 0.0.0.0
 # 允许http请求
