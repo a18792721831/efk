@@ -14,10 +14,11 @@ services:
       - 9301:9300
     volumes:
       - /etc/localtime:/etc/localtime
-      - ~/efk/elasticsearch0/:/usr/share/elasticsearch/
+      - ~/efk/elasticsearch0/data:/usr/share/elasticsearch/data
+      - ~/efk/elasticsearch0/logs:/usr/share/elasticsearch/logs
       - ~/efk/elasticsearch/elasticsearch.yaml:/usr/share/elasticsearch/config/elasticsearch.yml
     extra_hosts:
-      - 'elasticsearch: ${THIS_IP}:9301'
+      - 'elasticsearch: ${THIS_IP}'
     networks:
       - outside
   elasticsearch1:
@@ -31,10 +32,11 @@ services:
       - node.name=elasticsearch1
     volumes:
       - /etc/localtime:/etc/localtime
-      - ~/efk/elasticsearch1/:/usr/share/elasticsearch/
+      - ~/efk/elasticsearch0/data:/usr/share/elasticsearch/data
+      - ~/efk/elasticsearch0/logs:/usr/share/elasticsearch/logs
       - ~/efk/elasticsearch/elasticsearch.yaml:/usr/share/elasticsearch/config/elasticsearch.yml
     extra_hosts:
-      - 'elasticsearch: ${THIS_IP}:9301'
+      - 'elasticsearch: ${THIS_IP}'
     networks:
       - outside
 networks:
