@@ -16,7 +16,7 @@ services:
       - /etc/localtime:/etc/localtime
       - ~/efk/elasticsearch0/data:/usr/share/elasticsearch/data
       - ~/efk/elasticsearch0/logs:/usr/share/elasticsearch/logs
-      - ~/efk/elasticsearch/elasticsearch.yaml:/usr/share/elasticsearch/config/elasticsearch.yml:r
+      - ~/efk/elasticsearch/elasticsearch.yaml:/usr/share/elasticsearch/config/elasticsearch.yml
     extra_hosts:
       - 'elasticsearch: ${THIS_IP}'
     networks:
@@ -32,8 +32,8 @@ services:
       - node.name=elasticsearch1
     volumes:
       - /etc/localtime:/etc/localtime
-      - ~/efk/elasticsearch0/data:/usr/share/elasticsearch/data
-      - ~/efk/elasticsearch0/logs:/usr/share/elasticsearch/logs
+      - ~/efk/elasticsearch1/data:/usr/share/elasticsearch/data
+      - ~/efk/elasticsearch1/logs:/usr/share/elasticsearch/logs
       - ~/efk/elasticsearch/elasticsearch.yaml:/usr/share/elasticsearch/config/elasticsearch.yml
     extra_hosts:
       - 'elasticsearch: ${THIS_IP}'
