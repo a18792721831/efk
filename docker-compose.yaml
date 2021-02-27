@@ -16,7 +16,7 @@ services:
       - /etc/localtime:/etc/localtime
       - ~/efk/elasticsearch0/data:/usr/share/elasticsearch/data
       - ~/efk/elasticsearch0/logs:/usr/share/elasticsearch/logs
-      - ~/efk/elasticsearch/elasticsearch.yaml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ~/efk/elasticsearch/elasticsearch.yaml:/usr/share/elasticsearch/config/elasticsearch.yml:r
     extra_hosts:
       - 'elasticsearch: ${THIS_IP}'
     networks:
