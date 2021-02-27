@@ -1,24 +1,24 @@
 version: "3.2"
 services:
-  elasticsearch0:
+  elasticsearch-master:
     image: elasticsearch:${ES_VERSION}
     restart: always
-    container_name: elasticsearch0
-    hostname: elasticsearch0
+    container_name: elasticsearch-master
+    hostname: elasticsearch-master
     environment:
       - TZ=Asia/Shanghai
       - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
-      - node.name=elasticsearch0
+      - node.name=elasticsearch-master
     ports:
       - 9201:9200
       - 9301:9300
     volumes:
       - /etc/localtime:/etc/localtime
-      - ~/efk/elasticsearch0/data:/usr/share/elasticsearch/data
-      - ~/efk/elasticsearch0/logs:/usr/share/elasticsearch/logs
+      - ~/efk/elasticsearch-master/data:/usr/share/elasticsearch/data
+      - ~/efk/elasticsearch-master/logs:/usr/share/elasticsearch/logs
       - ~/efk/elasticsearch/elasticsearch.yaml:/usr/share/elasticsearch/config/elasticsearch.yml
     extra_hosts:
-      - 'elasticsearch: ${THIS_IP}'
+      - 'elasticsearch-master: ${MASTER_IP}'
     networks:
       - outside
   elasticsearch1:
@@ -36,7 +36,7 @@ services:
       - ~/efk/elasticsearch1/logs:/usr/share/elasticsearch/logs
       - ~/efk/elasticsearch/elasticsearch.yaml:/usr/share/elasticsearch/config/elasticsearch.yml
     extra_hosts:
-      - 'elasticsearch: ${THIS_IP}'
+      - 'elasticsearch: ${MASTER_IP}'
     networks:
       - outside
   elasticsearch2:
@@ -54,7 +54,7 @@ services:
       - ~/efk/elasticsearch2/logs:/usr/share/elasticsearch/logs
       - ~/efk/elasticsearch/elasticsearch.yaml:/usr/share/elasticsearch/config/elasticsearch.yml
     extra_hosts:
-      - 'elasticsearch: ${THIS_IP}'
+      - 'elasticsearch: ${MASTER_IP}'
     networks:
       - outside
 networks:
