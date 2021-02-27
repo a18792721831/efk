@@ -39,6 +39,24 @@ services:
       - 'elasticsearch: ${THIS_IP}'
     networks:
       - outside
+  elasticsearch2:
+    image: elasticsearch:7.10.1
+    restart: always
+    container_name: elasticsearch2
+    hostname: elasticsearch2
+    environment:
+      - TZ=Asia/Shanghai
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+      - node.name=elasticsearch2
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ~/efk/elasticsearch2/data:/usr/share/elasticsearch/data
+      - ~/efk/elasticsearch2/logs:/usr/share/elasticsearch/logs
+      - ~/efk/elasticsearch/elasticsearch.yaml:/usr/share/elasticsearch/config/elasticsearch.yml
+    extra_hosts:
+      - 'elasticsearch: ${THIS_IP}'
+    networks:
+      - outside
 networks:
   outside:
     external:
