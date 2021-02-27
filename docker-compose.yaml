@@ -1,57 +1,40 @@
 version: "3.2"
 services:
   elasticsearch0:
-    image: elasticsearch:6.8.13
+    image: elasticsearch:7.10.1
     restart: always
     container_name: elasticsearch0
     hostname: elasticsearch0
     environment:
       - TZ=Asia/Shanghai
-      - ES_JAVA_OPTS="-Xms256m -Xmx256m"
-      - cluster.name=elasticsearch-cluster
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
       - node.name=elasticsearch0
-      - network.host=0.0.0.0
-      - http.cors.enabled=true
-      - http.cors.allow-origin="*"
-      - cluster.initial_master_nodes=["elasticsearch0"]
-      - path.data=/usr/share/elasticsearch/data
-      - path.logs=/usr/share/elasticsearch/logs
-      - path.plugins=/usr/share/elasticsearch/plugins
     ports:
-      - 9200:9200
+      - 9201:9200
+      - 9301:9300
     volumes:
       - /etc/localtime:/etc/localtime
-      - ~/efk/elasticsearch0/data:/usr/share/elasticsearch/data
-      - ~/efk/elasticsearch0/logs:/usr/share/elasticsearch/logs
-      - ~/efk/elasticsearch0/plugins:/usr/share/elasticsearch/plugins
+      - ~/efk/elasticsearch0/:/usr/share/elasticsearch/
+      - ~/efk/elasticsearch/elasticsearch.yaml:/usr/share/elasticsearch/config/elasticsearch.yml
     extra_hosts:
-      - 'elasticsearch0: ${THIS_IP}'
+      - 'elasticsearch: ${THIS_IP}:9301'
     networks:
       - outside
   elasticsearch1:
-    image: elasticsearch:6.8.13
+    image: elasticsearch:7.10.1
     restart: always
     container_name: elasticsearch1
     hostname: elasticsearch1
     environment:
       - TZ=Asia/Shanghai
-      - ES_JAVA_OPTS="-Xms256m -Xmx256m"
-      - cluster.name=elasticsearch-cluster
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
       - node.name=elasticsearch1
-      - network.host=0.0.0.0
-      - http.cors.enabled=true
-      - http.cors.allow-origin="*"
-      - cluster.initial_master_nodes=["elasticsearch0"]
-      - path.data=/usr/share/elasticsearch/data
-      - path.logs=/usr/share/elasticsearch/logs
-      - path.plugins=/usr/share/elasticsearch/plugins
     volumes:
       - /etc/localtime:/etc/localtime
-      - ~/efk/elasticsearch1/data:/usr/share/elasticsearch/data
-      - ~/efk/elasticsearch1/logs:/usr/share/elasticsearch/logs
-      - ~/efk/elasticsearch1/plugins:/usr/share/elasticsearch/plugins
+      - ~/efk/elasticsearch1/:/usr/share/elasticsearch/
+      - ~/efk/elasticsearch/elasticsearch.yaml:/usr/share/elasticsearch/config/elasticsearch.yml
     extra_hosts:
-      - 'elasticsearch0: ${THIS_IP}'
+      - 'elasticsearch: ${THIS_IP}:9301'
     networks:
       - outside
 networks:

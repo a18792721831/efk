@@ -1,0 +1,16 @@
+# 集群的名字
+cluster.name: "elasticsearch-cluster"
+# 节点的名字
+#node.name: "boss-elasticsearch"
+# 主节点
+cluster.initial_master_nodes: ["elasticsearch"]
+# 网络访问
+network.host: 0.0.0.0
+# 允许http请求
+http.cors.enabled: true
+# 允许http请求范围
+http.cors.allow-origin: "*"
+# elasticsearch的数据目录
+path.data: /usr/share/elasticsearch/data
+# elasticsearch的日志目录
+path.logs: /usr/share/elasticsearch/logs
