@@ -45,6 +45,31 @@ services:
       - 9100:9100
     networks:
       - outside
+  kibana:
+    image: /kibana:6.8.13
+    restart: always
+    container_name: kibana
+    hostname: kibana
+    environment:
+      - TZ=Asia/Shanghai
+      - elasticsearch.hosts=http://${MASTER_IP}:${MASTER_PORT}
+      - elasticsearch.pingTimeout=300000
+      - kibana.index=.kibana
+      - logging.timezone=UTC+8
+      - server.host=0.0.0.0
+      - server.name=kibana
+      - server.port=5601
+      - i18n.locale=zh-CN
+      - xpack.monitoring.kibana.collection.enabled=false
+      - xpack.monitoring.ui.container.elasticsearch.enabled=true
+    volumes:
+      - /etc/localtime:/etc/localtime
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+    networks:
+      - outside
 networks:
   outside:
     external:
