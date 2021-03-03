@@ -72,6 +72,27 @@ services:
       - elasticsearch
     networks:
       - outside
+  fluentd:
+    image: fluentd-elasticsearch
+    restart: always
+    container_name: fluentd
+    hostname: fluentd
+    command: "fluentd -c /fluentd/etc/fluent.conf"
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ~/bosselastic/fluentd/logs:/fluentd/log
+      - ~/bosselastic/fluentd/fluent.conf:/fluentd/etc/fluent.conf:rw
+    ports:
+      - 24224:24224/udp
+      - 24224:24224
+    depends_on:
+      - elasticsearch
+    extra_hosts:
+      - 'elasticsearch: ${MASTER_IP}'
+    networks:
+      - outside
 networks:
   outside:
     external:
