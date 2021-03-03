@@ -1,4 +1,4 @@
-version: "3.2"
+version: "3"
 services:
   elasticsearch:
     image: elasticsearch/elasticsearch:6.8.13
@@ -43,16 +43,18 @@ services:
       - /etc/localtime:/etc/localtime
     ports:
       - 9100:9100
+    depends_on:
+      - elasticsearch
     networks:
       - outside
   kibana:
-    image: /kibana:6.8.13
+    image: kibana:6.8.13
     restart: always
     container_name: kibana
     hostname: kibana
     environment:
       - TZ=Asia/Shanghai
-      - elasticsearch.hosts=http://${MASTER_IP}:${MASTER_PORT}
+      - elasticsearch.hosts=http://${MASTER_IP}:${MASTER_HTTP_PORT}
       - elasticsearch.pingTimeout=300000
       - kibana.index=.kibana
       - logging.timezone=UTC+8

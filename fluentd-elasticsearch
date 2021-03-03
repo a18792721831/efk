@@ -1,0 +1,5 @@
+FROM fluentd:v1.9-1
+USER root
+WORKDIR /home/fluent
+RUN gem install fluent-plugin-elasticsearch
+EXPOSE 24224
